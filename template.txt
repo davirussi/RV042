@@ -1,0 +1,8 @@
+#template
+{% for item in data %}
+    # {{item.name}}
+        host {{item.name}} {
+        hardware ethernet {{item.mac}};
+        fixed address {{item.ip}}
+        }
+{% endfor %}
