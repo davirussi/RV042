@@ -1,8 +1,9 @@
-### simple way to scrap list os ips and macs from RV042 you will need the html with the information.
+### Simple way to scrap list os ips and macs from RV042 firmware  1.3.12.19-tm.
+### You will need the html with the information.
 import re
-from jinja2 import Template
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Template, Environment, FileSystemLoader
 
+#return a vector with dicionarys which contains ip, mac, hostname
 def scrapper(file):
     out=[]
     for line in file:
@@ -14,21 +15,18 @@ def scrapper(file):
             out.append(dic)
     return out 
 
-
+#function to create the file using Jinja2 templates
 def generater(dic):
     outfile=open('out.txt','w')
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.txt')    
     with open('ipmacname.txt', 'w') as f:
         f.write(template.render(data=dic))
-    
-def fun(filename):
+
+def main():
+    filename='dhcp_setup.htm'
     file=open(filename,'r')
     dic=scrapper(file)
     generater(dic)
-
-def main():
-    fun('dhcp_setup.htm')
     
 main()
-    
