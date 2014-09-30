@@ -10,7 +10,7 @@ def scrapper(file):
         if re.search("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} =>", line):
             dic={}
             dic['ip']=(re.search("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}",line).group(0))
-            dic['mac']=(re.search("([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})",line).group(0))
+            dic['mac']=(re.search("([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})",line).group(0)).replace('-',':')
             dic['name']=(re.search(" 1 .{1,15}'>",line).group(0)[2:-2])
             out.append(dic)
     return out 
